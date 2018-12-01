@@ -49,9 +49,11 @@ namespace LibraryApplication.Models
         public DateTime PublicationDate { get; set; }
 
         [Required]
+        [Display(Name = "Pages")]
         public int Pages { get; set; }
 
         [Required]
+        [Display(Name = "Product Dimensions")]
         public string ProductDimensions { get; set; }
 
         [Required]

@@ -7,9 +7,11 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using LibraryApplication.Models;
+using LibraryApplication.Utility;
 
 namespace LibraryApplication.Controllers
 {
+    [Authorize(Roles = StaticDetails.AdminUserRole)]
     public class MembershipController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
@@ -46,7 +48,7 @@ namespace LibraryApplication.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Membership membership)
+        public ActionResult Create([Bind(Include = "Id,Name,SignUpFee,ChargeRateSixMonth,ChargeRateTwelveMonth")]Membership membership)
         {
             if (ModelState.IsValid)
             {
@@ -78,7 +80,7 @@ namespace LibraryApplication.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(Membership membership)
+        public ActionResult Edit([Bind(Include = "Id,Name,SignUpFee,ChargeRateSixMonth,ChargeRateTwelveMonth")]Membership membership)
         {
             if (ModelState.IsValid)
             {

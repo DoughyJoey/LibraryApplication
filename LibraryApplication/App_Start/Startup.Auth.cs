@@ -54,14 +54,14 @@ namespace LibraryApplication
             //   consumerKey: "",
             //   consumerSecret: "");
 
-            //app.UseFacebookAuthentication(
-            //   appId: "",
-            //   appSecret: "");
+            app.UseFacebookAuthentication(
+               appId: "566360800452694",
+               appSecret: "aea5a325606fcd3fc0d9ca45827e397d");
 
             //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
             //{
-            //    ClientId = "",
-            //    ClientSecret = ""
+            //    ClientId = "76792913041-kvra31jkip9gm5fhtapoasprho6664t4.apps.googleusercontent.com",
+            //    ClientSecret = "-95eqUF5aNzueJkvRR0BCk8C"
             //});
         }
     }

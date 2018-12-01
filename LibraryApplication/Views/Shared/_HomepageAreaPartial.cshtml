@@ -1,0 +1,21 @@
+﻿@model LibraryApplication.ViewModel.HomepageBoxViewModel
+
+<div class="row">
+    @if (Model.Homepages != null)
+    {
+        foreach(var homepage in Model.Homepages)
+        {
+            <div class="col-xs-6 col-md-3">
+                <div class="homepage">
+                        <div class="homepage-img-container">
+                            <a href="@homepage.Link"><img class="homepage-img" src="@homepage.ImageUrl" alt="" /></a>
+                        </div>
+                    <div class="caption">
+                        <h3><a href="@homepage.Link">@homepage.Title</a></h3>
+                        <p>@Html.Raw(homepage.Description)</p>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+</div>

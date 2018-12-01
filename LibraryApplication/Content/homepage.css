@@ -1,0 +1,27 @@
+﻿.homepage .homepage-img-container{
+    overflow: hidden;
+}
+
+.homepage .homepage-img{
+    width: 100%;
+    height: auto;
+    transition: ease-in-out all 0.8s;
+}
+
+.homepage a,a:focus, a:hover, a:active{
+    outline: 0px none !important;
+    text-decoration:none;
+}
+
+.homepage{
+    transition: all 0.4s ease-in-out 0s;
+}
+
+.homepage:hover{
+    box-shadow: 0px 0px 8px #555;
+    transition: box-shadow 0.2s ease-in-out 0s;
+}
+
+.homepage :hover img{
+    transform: scale(1.05) rotate(1deg);
+}

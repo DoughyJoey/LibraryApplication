@@ -7,10 +7,12 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using LibraryApplication.Models;
+using LibraryApplication.Utility;
 using LibraryApplication.ViewModel;
 
 namespace LibraryApplication.Controllers
 {
+    [Authorize(Roles = StaticDetails.AdminUserRole)]
     public class BookController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
@@ -23,13 +25,13 @@ namespace LibraryApplication.Controllers
         }
 
         // GET: Book/Details/5
-        public ActionResult Details(int? id)
+        public ActionResult Details(int? ID)
         {
-            if (id == null)
+            if (ID == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Book book = db.Books.Find(id);
+            Book book = db.Books.Find(ID);
             if (book == null)
             {
                 return HttpNotFound();
@@ -93,13 +95,13 @@ namespace LibraryApplication.Controllers
         }
 
         // GET: Book/Edit/5
-        public ActionResult Edit(int? id)
+        public ActionResult Edit(int? ID)
         {
-            if (id == null)
+            if (ID == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Book book = db.Books.Find(id);
+            Book book = db.Books.Find(ID);
             if (book == null)
             {
                 return HttpNotFound();
@@ -117,6 +119,7 @@ namespace LibraryApplication.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [ValidateInput(false)]
         public ActionResult Edit(BookViewModel bookVM)
         {
             var book = new Book
@@ -132,13 +135,11 @@ namespace LibraryApplication.Controllers
                 ISBN = bookVM.Book.ISBN,
                 Pages = bookVM.Book.Pages,
                 Price = bookVM.Book.Price,
-                Publisher = bookVM.Book.Publisher,
                 ProductDimensions = bookVM.Book.ProductDimensions,
                 PublicationDate = bookVM.Book.PublicationDate,
+                Publisher = bookVM.Book.Publisher,
                 Title = bookVM.Book.Title
             };
-
-
             if (ModelState.IsValid)
             {
                 db.Entry(book).State = EntityState.Modified;
@@ -146,17 +147,17 @@ namespace LibraryApplication.Controllers
                 return RedirectToAction("Index");
             }
             bookVM.Genres = db.Genres.ToList();
-            return View(book);
+            return View(bookVM);
         }
 
         // GET: Book/Delete/5
-        public ActionResult Delete(int? id)
+        public ActionResult Delete(int? ID)
         {
-            if (id == null)
+            if (ID == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Book book = db.Books.Find(id);
+            Book book = db.Books.Find(ID);
             if (book == null)
             {
                 return HttpNotFound();
@@ -174,9 +175,9 @@ namespace LibraryApplication.Controllers
         // POST: Book/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult DeleteConfirmed(int ID)
         {
-            Book book = db.Books.Find(id);
+            Book book = db.Books.Find(ID);
             db.Books.Remove(book);
             db.SaveChanges();
             return RedirectToAction("Index");

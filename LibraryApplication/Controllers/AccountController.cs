@@ -9,6 +9,8 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using LibraryApplication.Models;
+using Microsoft.AspNet.Identity.EntityFramework;
+using LibraryApplication.Utility;
 
 namespace LibraryApplication.Controllers
 {
@@ -139,7 +141,15 @@ namespace LibraryApplication.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
-            return View();
+            using (var db = ApplicationDbContext.Create())
+            {
+                RegisterViewModel newUser = new RegisterViewModel
+                {
+                    Memberships = db.Memberships.Where(m=>!m.Name.ToLower().Equals(StaticDetails.AdminUserRole.ToLower())).ToList(),
+                    BirthDate = DateTime.Now
+                };
+                return View(newUser);
+            }
         }
 
         //
@@ -151,12 +161,43 @@ namespace LibraryApplication.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser
+                {
+                    UserName = model.Email,
+                    Email = model.Email,
+                    BirthDate = model.BirthDate,
+                    LastName = model.LastName,
+                    FirstName = model.FirstName,
+                    Phone = model.Phone,
+                    MembershipID = model.MembershipID,
+                    Disable = false
+                };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-                    
+
+                    using (var db = ApplicationDbContext.Create())
+                    {
+                        model.Memberships = db.Memberships.ToList();
+                        var roleStore = new RoleStore<IdentityRole>(new ApplicationDbContext());
+                        var roleManager = new RoleManager<IdentityRole>(roleStore);
+                        var memebership = model.Memberships.SingleOrDefault(m => m.ID == model.MembershipID).Name.ToString();
+
+                        if (memebership.ToLower().Contains("admin"))
+                        {
+                            //For Super Admin
+                            await roleManager.CreateAsync(new IdentityRole(StaticDetails.AdminUserRole));
+                            await UserManager.AddToRoleAsync(user.Id, StaticDetails.AdminUserRole);
+                        }
+                        else
+                        {
+                            //For Customer
+                            await roleManager.CreateAsync(new IdentityRole(StaticDetails.EndUserRole));
+                            await UserManager.AddToRoleAsync(user.Id, StaticDetails.EndUserRole);
+                        }
+                    }
+                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
@@ -167,7 +208,10 @@ namespace LibraryApplication.Controllers
                 }
                 AddErrors(result);
             }
-
+            using (var db = ApplicationDbContext.Create())
+            {
+                model.Memberships = db.Memberships.ToList();
+            }
             // If we got this far, something failed, redisplay form
             return View(model);
         }
@@ -343,9 +387,20 @@ namespace LibraryApplication.Controllers
                     // If the user does not have an account, then prompt the user to create an account
                     ViewBag.ReturnUrl = returnUrl;
                     ViewBag.LoginProvider = loginInfo.Login.LoginProvider;
-                    return View("ExternalLoginConfirmation", new ExternalLoginConfirmationViewModel { Email = loginInfo.Email });
+
+                    using (var db = ApplicationDbContext.Create())
+                    {
+                        return View("ExternalLoginConfirmation", new ExternalLoginConfirmationViewModel
+                        {
+                            Email = loginInfo.Email,
+                            BirthDate = DateTime.Now,
+                            Memberships = db.Memberships.Where(m => !m.Name.ToLower().Equals(StaticDetails.AdminUserRole.ToLower())).ToList()
+                        });
+                    }
             }
         }
+
+
 
         //
         // POST: /Account/ExternalLoginConfirmation
@@ -367,7 +422,22 @@ namespace LibraryApplication.Controllers
                 {
                     return View("ExternalLoginFailure");
                 }
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+
+                var name = info.ExternalIdentity.Name.Split(' ');
+                var firstName = name[0].ToString();
+                var lastName = name[1].ToString();
+
+                var user = new ApplicationUser
+                {
+                    UserName = model.Email,
+                    Email = model.Email,
+                    FirstName = firstName,
+                    LastName = lastName,
+                    BirthDate = model.BirthDate,
+                    Phone = model.Phone,
+                    MembershipID = model.MembershipID,
+                    Disable = false
+                };
                 var result = await UserManager.CreateAsync(user);
                 if (result.Succeeded)
                 {

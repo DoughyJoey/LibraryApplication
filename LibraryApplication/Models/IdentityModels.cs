@@ -32,6 +32,7 @@ namespace LibraryApplication.Models
         public DbSet<Book> Books { get; set; }
         public DbSet<Genre> Genres { get; set; }
         public DbSet<Membership> Memberships { get; set; }
+        public DbSet<BookRental> BookRentals { get; set; }
 
 
         public ApplicationDbContext()

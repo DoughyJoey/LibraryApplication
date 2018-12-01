@@ -21,10 +21,15 @@ namespace LibraryApplication
 
             bundles.Add(new ScriptBundle("~/bundles/libraryRentalJs").Include(
                       "~/Scripts/bootstrap.js",
+                      "~/Scripts/typeahead.bundle.js",
                       "~/Scripts/AdminMenu.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
+                      "~/Content/homepage.css",
+                      "~/Content/facebook-button.css",
+                      "~/Content/BookInformation.css",
+                      "~/Content/Typeahead.css",
                       "~/Content/site.css"));
         }
     }

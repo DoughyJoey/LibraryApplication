@@ -5,9 +5,11 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using LibraryApplication.Models;
+using LibraryApplication.Utility;
 
 namespace LibraryApplication.Controllers
 {
+    [Authorize(Roles = StaticDetails.AdminUserRole)]
     public class GenreController : Controller
     {
         private ApplicationDbContext db;

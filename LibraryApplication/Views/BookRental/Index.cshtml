@@ -1,0 +1,234 @@
+﻿@model IPagedList<LibraryApplication.ViewModel.BookRentalViewModel>
+@using PagedList
+@using PagedList.Mvc
+@using LibraryApplication.Utility
+@using LibraryApplication.Models
+@{
+    ViewBag.Title = "Index";
+}
+
+@using (Html.BeginForm("Index", "BookRental", FormMethod.Get))
+{
+
+<br />
+<div class="row">
+    <div class="col-sm-4">
+        <h3>Book Rental Portal</h3>
+        @if (User.IsInRole(StaticDetails.AdminUserRole))
+        {
+            <p>
+                @Html.Partial("_CreateButtonPartial")
+            </p>
+        }
+    </div>
+    <div class="col-sm-8 pull-right">
+        <div class="row">
+            <div class="col-sm-12 text-right">
+                @if (User.IsInRole(StaticDetails.AdminUserRole))
+                {
+                    <label class="radio-inline">
+                        @Html.RadioButton("option", "name") Name
+                    </label>
+                    <label class="radio-inline">
+                        @Html.RadioButton("option", "email") Email
+                    </label>
+                }
+                <label class="radio-inline">
+                    @Html.RadioButton("option", "status") Status
+                </label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="pull-right">
+                <button type="submit" name="submit" value="Search" class="btn btn-sm btn-primary">
+                    <span class="glyphicon glyphicon-search"></span> &nbsp; Search
+                </button>
+            </div>
+            <div class="pull-right">
+                @Html.Editor("search", new { htmlAttributes = new { @class = "form-control input-sm" } })
+            </div>
+        </div>
+    </div>
+</div>
+<br />
+<table class="table table-condensed table-hover">
+    <tr class="table-header">
+        <th></th>
+        <th></th>
+        <th>
+            @Html.DisplayNameFor(m => m.First().Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(m => m.First().Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(m => m.First().Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(m => m.First().StartDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(m => m.First().ScheduledReturnDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(m => m.First().RentalPrice)
+        </th>
+        <th>
+            @Html.DisplayNameFor(m => m.First().RentalDuration)
+        </th>
+        <th>
+            @Html.DisplayNameFor(m => m.First().Status)
+        </th>
+        <th></th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.HiddenFor(m => item.UserID)
+            </td>
+            <td>
+                @Html.HiddenFor(m => item.BookID)
+            </td>
+            <td>
+                @Html.DisplayFor(m => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(m => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(m => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(m => item.StartDate)
+            </td>
+            <td>
+                @Html.DisplayFor(m => item.ScheduledReturnDate)
+            </td>
+            <td>
+                @Html.DisplayFor(m => item.RentalPrice)
+            </td>
+            <td>
+                @Html.DisplayFor(m => item.RentalDuration)
+            </td>
+            <td>
+                @Html.DisplayFor(m => item.Status)
+            </td>
+            <td>
+                @Html.Partial("_IndividualButtonPartial", new IndividualButtonPartial
+           {
+               Action = "Details",
+               ButtonType = "btn-success",
+               Glyph = "list",
+               Text = "Details Button",
+               BookID = null,
+               CustomerID = null,
+               GenreID = null,
+               MembershipID = null,
+               UserID = null,
+               BookRentalID = item.ID
+           })
+            </td>
+            <td>
+
+                @if (item.Status.ToString().ToLower().Equals(StaticDetails.RequestedLower) && User.IsInRole(StaticDetails.AdminUserRole))
+                {
+                    //Approve and Decline Buttons
+                    @Html.Partial("_IndividualButtonPartial", new IndividualButtonPartial
+                    {
+                       Action = "Decline",
+                       ButtonType = "btn-danger",
+                       Glyph = "remove",
+                       Text = "Decline Button",
+                       BookID = null,
+                       CustomerID = null,
+                       GenreID = null,
+                       MembershipID = null,
+                       UserID = null,
+                       BookRentalID = item.ID
+                    })
+                    @Html.Partial("_IndividualButtonPartial", new IndividualButtonPartial
+                   {
+                      Action = "Approve",
+                      ButtonType = "btn-primary",
+                      Glyph = "ok",
+                      Text = "Approve Button",
+                      BookID = null,
+                      CustomerID = null,
+                      GenreID = null,
+                      MembershipID = null,
+                      UserID = null,
+                      BookRentalID = item.ID
+                   })
+                }
+                else
+                {
+                    if ((item.Status.ToString().ToLower().Equals(StaticDetails.RequestedLower) && (User.IsInRole(StaticDetails.EndUserRole))) ||
+                        (User.IsInRole(StaticDetails.AdminUserRole) && !item.Status.ToString().ToLower().Equals(StaticDetails.ClosedLower)))
+                    {
+                        //Show Delete Button
+                        //If Status is Requested for Customers, show them delete button
+                        //If User is admin and status is not closed then show admin delete button
+                        @Html.Partial("_IndividualButtonPartial", new IndividualButtonPartial
+                        {
+                           Action = "Delete",
+                           ButtonType = "btn-danger",
+                           Glyph = "trash",
+                           Text = "Delete Button",
+                           BookID = null,
+                           CustomerID = null,
+                           GenreID = null,
+                           MembershipID = null,
+                           UserID = null,
+                           BookRentalID = item.ID
+                        })
+                    }
+                    if (item.Status.ToString().ToLower().Equals(StaticDetails.ApprovedLower) && User.IsInRole(StaticDetails.AdminUserRole))
+                    {
+                        //Display PickUp Button
+                        @Html.Partial("_IndividualButtonPartial", new IndividualButtonPartial
+                        {
+                           Action = "PickUp",
+                           ButtonType = "btn-primary",
+                           Glyph = "share-alt",
+                           Text = "PickUp Button",
+                           BookID = null,
+                           CustomerID = null,
+                           GenreID = null,
+                           MembershipID = null,
+                           UserID = null,
+                           BookRentalID = item.ID
+                        })
+                    }
+                    else
+                    {
+                        if (item.Status.ToString().ToLower().Equals(StaticDetails.RentedLower) && User.IsInRole(StaticDetails.AdminUserRole))
+                        {
+                            //Display Return Button
+                            @Html.Partial("_IndividualButtonPartial", new IndividualButtonPartial
+                            {
+                               Action = "Return",
+                               ButtonType = "btn-primary",
+                               Glyph = "retweet",
+                               Text = "Return Button",
+                               BookID = null,
+                               CustomerID = null,
+                               GenreID = null,
+                               MembershipID = null,
+                               UserID = null,
+                               BookRentalID = item.ID
+                            })
+                        }
+                    }
+                }
+
+            </td>
+        </tr>
+    }
+</table>
+
+@Html.PagedListPager(Model,pageNumber=>Url.Action("Index",new { pageNumber }))
+}
+
