@@ -9,11 +9,13 @@ namespace LibraryApplication.Models
 {
     public class Genre
     {
+        //Required fields for security and validation
+        //Required makes sure field is not null
         [Required]
         public int ID { get; set; }
 
         [Required]
-        [DisplayName("Genre Name")]
+        [DisplayName("Name")]
         public string Name { get; set; }
     }
 }

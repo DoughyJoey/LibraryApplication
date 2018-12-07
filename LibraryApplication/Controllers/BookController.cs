@@ -20,6 +20,7 @@ namespace LibraryApplication.Controllers
         // GET: Book
         public ActionResult Index()
         {
+            //uses entity to link Books and Genre tables and stores in books
             var books = db.Books.Include(b => b.Genre);
             return View(books.ToList());
         }
@@ -64,6 +65,7 @@ namespace LibraryApplication.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(BookViewModel bookVM)
         {
+            //convert BookViewModel into an object
 
             var book = new Book
             {
@@ -106,11 +108,15 @@ namespace LibraryApplication.Controllers
             {
                 return HttpNotFound();
             }
+            //Create an new BookViewModel object called model
             var model = new BookViewModel
             {
+                //pass in Book
                 Book = book,
+                //get genre from the database
                 Genres = db.Genres.ToList()
             };
+            //pass model to the view
             return View(model);
         }
 
@@ -124,6 +130,8 @@ namespace LibraryApplication.Controllers
         {
             var book = new Book
             {
+
+                //convert BookViewModel into an object
                 ID = bookVM.Book.ID,
                 Author = bookVM.Book.Author,
                 Availability = bookVM.Book.Availability,
@@ -146,6 +154,7 @@ namespace LibraryApplication.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            //only called if the model state is not valid
             bookVM.Genres = db.Genres.ToList();
             return View(bookVM);
         }
@@ -177,7 +186,9 @@ namespace LibraryApplication.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int ID)
         {
+            //finds ID from the database
             Book book = db.Books.Find(ID);
+            //removes book
             db.Books.Remove(book);
             db.SaveChanges();
             return RedirectToAction("Index");

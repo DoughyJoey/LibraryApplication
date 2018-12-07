@@ -27,8 +27,11 @@ namespace LibraryApplication.Models
         }
     }
 
+    //ApplicationDbContent inhertits from IdentityDbContent
+    //IdentityDbContent is responible connections to the database & manages database creation based on the models
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
+        //Created objects for Book, Genre, Membership & BookRental
         public DbSet<Book> Books { get; set; }
         public DbSet<Genre> Genres { get; set; }
         public DbSet<Membership> Memberships { get; set; }

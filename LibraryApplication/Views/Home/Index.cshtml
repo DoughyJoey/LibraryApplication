@@ -1,28 +1,58 @@
 ﻿@model IEnumerable<LibraryApplication.ViewModel.HomepageBoxViewModel>
 
-@{ 
+@{
     ViewBag.Title = "Home Page";
 }
 
 @using (Html.BeginForm("Index", "Home", FormMethod.Get))
 {
-<div class="row">
-    <div class="pull-left" style="padding-top: 20px;">
-        <button type="submit" value="Search" class="btn btn-sm btn-primary">
-            <span class="glyphicon glyphicon-search"></span> &nbsp; Search
-        </button>
+    <div class="row">
+        <div class="pull-right" style="padding-top: 20px; padding-right: 20px;">
+            <button type="submit" value="Search" class="btn btn-sm btn-success">
+                <span class="glyphicon glyphicon-search"></span> &nbsp; Search
+            </button>
+        </div>
+        <div class="pull-right" style="padding-top: 20px;">
+            @Html.Editor("search", new { htmlattributes = new { @class = "form-control input-sm" } })
+        </div>
     </div>
-    <div class="pull-left" style="padding-top: 20px;">
-        @Html.Editor("search", new { htmlattributes = new { @class = "form-control input-sm" } })
+
+    <br />
+}
+
+<div class="jumbotron" style="background-color: #D9B9C8;">
+    <h1 style="text-align: center; color: white;">Joe's Library</h1>
+    <p class="lead" style="text-align: center;">Worst Library In Dublin.</p>
+    <p style="text-align: center;"><a href="https://joebooks.com/" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+</div>
+
+<div class="row">
+    <div class="col-md-4" style="text-align: center;">
+        <h2>Some of our awful deals</h2>
+        <p>
+            Complete rip off.
+        </p>
+        <p><a class="btn btn-success" href="https://www.easons.com/custom-catalog/jan-sale/extended-wow/">Learn more &raquo;</a></p>
+    </div>
+    <div class="col-md-4" style="text-align: center;">
+        <h2>We also sell gifts</h2>
+        <p>25% off all gifts.</p>
+        <p><a class="btn btn-success" href="https://www.easons.com/gifts/">Learn more &raquo;</a></p>
+    </div>
+    <div class="col-md-4" style="text-align: center;">
+        <h2>History</h2>
+        <p>Learn more about us.</p>
+        <p><a class="btn btn-success" href="https://www.shopbookshop.com/pages/about-us">Learn more &raquo;</a></p>
     </div>
 </div>
 
-<br/>
+<br />
+<br />
+<hr />
 
-}
 
 <div class="row">
-    @foreach(var area in Model)
+    @foreach (var area in Model)
     {
         @Html.Partial("_HomepageAreaPartial", area);
     }

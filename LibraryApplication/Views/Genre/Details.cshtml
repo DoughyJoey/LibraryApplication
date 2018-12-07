@@ -4,13 +4,13 @@
 }
 
 <div>
-    <h3>Genre Details</h3>
-    <hr/>
-
+    <h2>Details</h2>
+    <hr />
     <div class="form-border">
 
+        @*disabled attribute used to stop user from editing information*@
         <fieldset disabled>
-            <div class="row" style="padding-bottom:5px; padding-top:5px;">
+            <div class="row" style="padding-bottom:20px;padding-top:7px;">
                 <div class="col-md-2">
                     @Html.LabelFor(m => m.Name, htmlAttributes: new { @class = "control-label" })
                 </div>
@@ -22,10 +22,11 @@
     </div>
 </div>
 
-<br/>
-
+<br />
 <p>
+    @*go back to the index back*@
     @Html.Partial("_GoBackButtonPartial")
-    @Html.Partial("_EditButtonPartial",Model.ID)
+    @*redirects user to the edit page*@
+    @Html.Partial("_EditButtonPartial", Model.ID)
 </p>
 

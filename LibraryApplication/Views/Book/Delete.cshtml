@@ -9,7 +9,7 @@
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <h3>Delete</h3>
+        <h2>Delete</h2>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.Book.ID)
@@ -138,5 +138,8 @@
             </div>
         </div>
     </div>
+
+    <br />
+    <br />
 
 }

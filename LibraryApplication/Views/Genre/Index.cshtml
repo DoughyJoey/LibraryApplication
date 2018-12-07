@@ -1,4 +1,5 @@
-﻿@model IEnumerable<LibraryApplication.Models.Genre>
+﻿@*object passed from the controller*@
+@model IEnumerable<LibraryApplication.Models.Genre>
 @using LibraryApplication.Models
 
 @{
@@ -7,6 +8,7 @@
 
 <h2>Genre</h2>
 
+@*references create partial view button*@
 @Html.Partial("_CreateButtonPartial")
 
 <br/>
@@ -15,6 +17,7 @@
 <table class="table table-condensed table-hover">
     <tr class="table-header">
         <th>
+            @*displays the genre name*@
             @Html.DisplayNameFor(m=>m.Name)
         </th>
         <th></th>
@@ -32,4 +35,5 @@
             </td>
         </tr>
     }
+
 </table>

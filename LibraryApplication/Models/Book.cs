@@ -8,9 +8,12 @@ namespace LibraryApplication.Models
 {
     public class Book
     {
+        //Required fields for security and validation
+        //Required makes sure field is not null
         [Required]
         public int ID { get; set; }
 
+        //ISBN is the International Standard Book Number
         [Required]
         public string ISBN { get; set; }
 
@@ -28,6 +31,7 @@ namespace LibraryApplication.Models
         public string ImageUrl { get; set; }
 
         [Required]
+        //Sets book availability to be between 0 and 1000
         [Range(0, 1000)]
         public int Availability { get; set; }
 
@@ -41,6 +45,7 @@ namespace LibraryApplication.Models
         [Required]
         public int GenreID { get; set; }
 
+        //Reference to Genre class
         public Genre Genre { get; set; }
 
         [Required]
@@ -53,6 +58,7 @@ namespace LibraryApplication.Models
         public int Pages { get; set; }
 
         [Required]
+        //Dimensions of book
         [Display(Name = "Product Dimensions")]
         public string ProductDimensions { get; set; }
 

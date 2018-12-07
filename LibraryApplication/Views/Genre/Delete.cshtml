@@ -8,11 +8,12 @@
     @Html.AntiForgeryToken();
 
     <div>
-        <h3>Are you sure you want to delete?</h3>
+        <h2>Are you sure?</h2>
         <hr />
         <div class="form-border">
+            @*disabled attribute used to stop user from editing information*@
             <fieldset disabled>
-                <div class="row" style="padding-bottom:5px; padding-top:5px;">
+                <div class="row" style="padding-bottom:20px; padding-top:7px;">
                     <div class="col-md-2">
                         @Html.LabelFor(m => m.Name, htmlAttributes: new { @class = "control-label" })
                     </div>
@@ -26,6 +27,7 @@
 
     <br/>
     <div>
+        @*go back to the index back*@
         @Html.Partial("_GoBackButtonPartial")
         <input type="submit" value="Delete" class="btn btn-sm btn-danger" />
     </div>

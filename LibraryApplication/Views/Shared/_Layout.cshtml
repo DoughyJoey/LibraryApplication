@@ -23,9 +23,10 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Rental Status", "Index", "BookRental")</li>
+                    <li>@Html.ActionLink("Book Status", "Index", "BookRental")</li>
                     @if (User.IsInRole(StaticDetails.AdminUserRole))
                     {
+                        //includes the admin menu dropdown
                         @Html.Partial("_AdminMenuPartial")
                     }
                 </ul>
@@ -44,6 +45,7 @@
         </div>
     </footer>
     @Scripts.Render("~/bundles/jquery")
+    @*Referenced in BundleConfig*@
     @Scripts.Render("~/bundles/libraryRentalJs")
     @RenderSection("scripts", required: false)
 </body>

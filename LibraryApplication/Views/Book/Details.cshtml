@@ -6,7 +6,7 @@
 
 
 <div class="form-horizontal">
-    <h3>Details</h3>
+    <h2>Details</h2>
     <hr />
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
     @Html.HiddenFor(model => model.Book.ID)
@@ -130,8 +130,13 @@
     <br />
     <div class="form-group">
         <div class="col-md-10">
-            @Html.Partial("_EditButtonPartial",Model.Book.ID)
+            @*redirects to edit button partial*@
+            @*ID is used to identify the book we are editing*@
+            @Html.Partial("_EditButtonPartial", Model.Book.ID)
             @Html.Partial("_GoBackButtonPartial")
         </div>
     </div>
 </div>
+
+<br />
+<br />
