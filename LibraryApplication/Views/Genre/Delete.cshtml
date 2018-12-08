@@ -7,23 +7,24 @@
 {
     @Html.AntiForgeryToken();
 
-    <div>
-        <h2>Are you sure?</h2>
-        <hr />
-        <div class="form-border">
-            @*disabled attribute used to stop user from editing information*@
-            <fieldset disabled>
-                <div class="row" style="padding-bottom:20px; padding-top:7px;">
-                    <div class="col-md-2">
-                        @Html.LabelFor(m => m.Name, htmlAttributes: new { @class = "control-label" })
-                    </div>
-                    <div class="col-md-10">
-                        @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
-                    </div>
+<div>
+    <h3><b>Delete</b></h3>
+
+
+    <div class="form-border" style="border:3px solid #D9B9C8; border-radius:7px;">
+        @*disabled attribute used to stop user from editing information*@
+        <fieldset disabled>
+            <div class="row" style="padding-bottom:20px; padding-top:7px;">
+                <div class="col-md-2">
+                    @Html.LabelFor(m => m.Name, htmlAttributes: new { @class = "control-label" })
                 </div>
-            </fieldset>
-        </div>
+                <div class="col-md-10">
+                    @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+                </div>
+            </div>
+        </fieldset>
     </div>
+</div>
 
     <br/>
     <div>

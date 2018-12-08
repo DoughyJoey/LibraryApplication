@@ -172,7 +172,9 @@ namespace LibraryApplication.Controllers
                     MembershipID = model.MembershipID,
                     Disable = false
                 };
+
                 var result = await UserManager.CreateAsync(user, model.Password);
+
                 if (result.Succeeded)
                 {
 

@@ -80,7 +80,7 @@ namespace LibraryApplication.Controllers
                 Pages = bookVM.Book.Pages,
                 Price = bookVM.Book.Price,
                 Publisher = bookVM.Book.Publisher,
-                ProductDimensions = bookVM.Book.ProductDimensions,
+                //ProductDimensions = bookVM.Book.ProductDimensions,
                 PublicationDate = bookVM.Book.PublicationDate,
                 Title = bookVM.Book.Title
             };
@@ -143,7 +143,7 @@ namespace LibraryApplication.Controllers
                 ISBN = bookVM.Book.ISBN,
                 Pages = bookVM.Book.Pages,
                 Price = bookVM.Book.Price,
-                ProductDimensions = bookVM.Book.ProductDimensions,
+                //ProductDimensions = bookVM.Book.ProductDimensions,
                 PublicationDate = bookVM.Book.PublicationDate,
                 Publisher = bookVM.Book.Publisher,
                 Title = bookVM.Book.Title

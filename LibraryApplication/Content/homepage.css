@@ -1,28 +1,36 @@
-﻿.homepage .homepage-img-container{
+﻿.homepage {
+    transition: all 1s ease-in-out 0s;
+}
+
+.homepage .homepage-img {
+    /*specifies a transition effect with a slow start and end*/
+    transition: ease-in-out all 1s;
+    height: auto;
+    width: 100%;
+}
+
+/*The overflow is clipped, and the rest of the content will be invisible*/
+.homepage .homepage-img-container {
     overflow: hidden;
 }
 
-.homepage .homepage-img{
-    width: 100%;
-    height: auto;
-    transition: ease-in-out all 0.8s;
-}
-
-.homepage a,a:focus, a:hover, a:active{
+.homepage a, a:focus, a:hover, a:active {
+    /*removes underline from book title*/
+    text-decoration: none;
     outline: 0px none !important;
-    text-decoration:none;
 }
 
-.homepage{
-    transition: all 0.4s ease-in-out 0s;
+.homepage :hover img {
+    /*changes scale of image and rotates it to -3 degrees*/
+    transform: scale(0.9) rotate(-3deg);
 }
 
-.homepage:hover{
-    box-shadow: 0px 0px 8px #555;
-    transition: box-shadow 0.2s ease-in-out 0s;
+
+.homepage:hover {
+    transition: box-shadow 0.3s ease-in-out 0s;
+    /*adds purple shadow styling around box*/
+    box-shadow: 8px 8px 8px #D9B9C8;
 }
 
-.homepage :hover img{
-    transform: scale(1.05) rotate(1deg);
-}
+
 

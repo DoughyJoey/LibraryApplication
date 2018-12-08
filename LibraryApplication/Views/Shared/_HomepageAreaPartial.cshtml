@@ -3,11 +3,14 @@
 <div class="row">
     @if (Model.Homepages != null)
     {
+        //foreach item in homepage we display the details
         foreach(var homepage in Model.Homepages)
         {
+            //displays 4 books in a line
             <div class="col-xs-6 col-md-3">
                 <div class="homepage">
                         <div class="homepage-img-container">
+                            @*//redirects to the information page*@
                             <a href="@homepage.Link"><img class="homepage-img" src="@homepage.ImageUrl" alt="" /></a>
                         </div>
                     <div class="caption">

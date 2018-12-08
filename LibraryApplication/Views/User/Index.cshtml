@@ -5,13 +5,12 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Manage Users</h2>
+<h2><b>USERS</b></h2>
+<br />
 
-@Html.Partial("_CreateButtonPartial")
-<br />
-<br />
 <table class="table table-condensed table-hover">
     <tr class="table-header">
+        @*displays headings to user*@
         <th>
             @Html.DisplayNameFor(m => m.FirstName)
         </th>
@@ -58,6 +57,7 @@
                 @Html.CheckBoxFor(m => item.Disabled, new { @disabled = "disabled" })
             </td>
             <td>
+                @*displays table buttons*@
                 @Html.Partial("_TableButtonPartial", new IndividualButtonPartial { UserID = item.Id })
             </td>
         </tr>

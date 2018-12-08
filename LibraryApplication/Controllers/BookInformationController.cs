@@ -53,7 +53,7 @@ namespace LibraryApplication.Controllers
                 Price = bookModel.Price,
                 Publisher = bookModel.Publisher,
                 PublicationDate = bookModel.PublicationDate,
-                ProductDimensions = bookModel.ProductDimensions,
+                //ProductDimensions = bookModel.ProductDimensions,
                 Title = bookModel.Title,
                 UserID = userid,
                 RentalPrice = rentalPrice,

@@ -4,7 +4,7 @@
     ViewBag.Title = "Manage your external logins";
 }
 
-<h2>@ViewBag.Title.</h2>
+<h2><b>@ViewBag.Title</b></h2>
 
 <p class="text-success">@ViewBag.StatusMessage</p>
 @{
@@ -57,12 +57,18 @@
             {
                 @Html.AntiForgeryToken()
                 <div id="socialLoginList">
-                <p>
-                    @foreach (AuthenticationDescription p in Model.OtherLogins)
-                    {
-                        <button type="submit" class="btn btn-default" id="@p.AuthenticationType" name="provider" value="@p.AuthenticationType" title="Log in using your @p.Caption account">@p.AuthenticationType</button>
-                    }
-                </p>
+                    <p>
+                        <a type="button" class="btn btn-sm btn-success" href="@Url.Action("Index")">
+                            <span class="glyphicon glyphicon-triangle-left"></span>
+                            <span>Go Back</span>
+                        </a>
+
+                        @foreach (AuthenticationDescription p in Model.OtherLogins)
+                        {
+                            <button type="submit" class="btn btn-sm btn-facebook btn-facebook:hover" id="@p.AuthenticationType" name="provider" value="@p.AuthenticationType" title="Log in using your @p.Caption account">@p.AuthenticationType</button>
+                        }
+
+                    </p>
                 </div>
             }
         }

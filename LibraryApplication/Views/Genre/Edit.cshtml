@@ -10,10 +10,9 @@
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <h2>Edit</h2>
-        <hr />
+        <h3><b>Edit</b></h3>
 
-        <div class="form-border">
+        <div class="form-border" style="border:3px solid #D9B9C8; border-radius:7px;">
             @*Saves ID of genre on the page so it is passed when edited*@
             @Html.HiddenFor(m => m.ID)
             <div class="form-group">

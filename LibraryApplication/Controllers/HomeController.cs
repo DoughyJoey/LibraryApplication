@@ -14,13 +14,16 @@ namespace LibraryApplication.Controllers
         public ActionResult Index(string search = null)
         {
             var homepages = new List<HomepageModel>().GetBookHomepage(ApplicationDbContext.Create(),search);
+            //RETURNS TWO ROWS FROM THE DATABASE
             var count = homepages.Count() / 4;
             var model = new List<HomepageBoxViewModel>();
 
             for(int i = 0; i <= count; i++)
             {
+
                 model.Add(new HomepageBoxViewModel
                 {
+                    //takes a count of 4 and adds it to Homepages then add to model
                     Homepages = homepages.Skip(i * 4).Take(4)
                 });
             }

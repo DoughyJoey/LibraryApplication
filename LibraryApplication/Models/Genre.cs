@@ -15,7 +15,7 @@ namespace LibraryApplication.Models
         public int ID { get; set; }
 
         [Required]
-        [DisplayName("Name")]
+        [DisplayName("Genre")]
         public string Name { get; set; }
     }
 }

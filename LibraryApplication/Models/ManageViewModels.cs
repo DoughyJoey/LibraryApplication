@@ -16,12 +16,14 @@ namespace LibraryApplication.Models
 
         public ICollection<Membership> Memberships { get; set; }
         [Required]
+        [Display(Name = "Membership Type")]
         public int MembershipID { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Phone { get; set; }
 
         [DataType(DataType.Date)]
+        [Display(Name = "Date Of Birth")]
         [DisplayFormat(DataFormatString ="{0:MMM dd yyyy")]
         public DateTime BirthDate { get; set; }
 

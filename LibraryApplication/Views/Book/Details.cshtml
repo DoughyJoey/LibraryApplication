@@ -6,15 +6,20 @@
 
 
 <div class="form-horizontal">
-    <h2>Details</h2>
-    <hr />
+    <h3><b>Details</b></h3>
+    <br />
+
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
     @Html.HiddenFor(model => model.Book.ID)
 
-    <div class="row" style="border:1px solid #bbb9b9; border-radius:5px;">
+    <div class="row" style="border:3px solid #D9B9C8; border-radius:7px;">
         <br />
         <div class="col-sm-10">
+
+            @*fieldset disabled stops user from editing information*@
             <fieldset disabled>
+
+                @*BOOK ID*@
                 <div class="form-group">
                     @Html.LabelFor(model => model.Book.ISBN, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
@@ -23,6 +28,7 @@
                     </div>
                 </div>
 
+                @*BOOK TITLE*@
                 <div class="form-group">
                     @Html.LabelFor(model => model.Book.Title, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
@@ -31,6 +37,7 @@
                     </div>
                 </div>
 
+                @*BOOK AUTHOR*@
                 <div class="form-group">
                     @Html.LabelFor(model => model.Book.Author, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
@@ -39,14 +46,7 @@
                     </div>
                 </div>
 
-                <div class="form-group">
-                    @Html.LabelFor(model => model.Book.Description, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.TextAreaFor(model => model.Book.Description, new { @class = "form-control", style = "height: 260px;" })
-                        @Html.ValidationMessageFor(model => model.Book.Description, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-
+                @*IMAGE URL FOR BOOK*@
                 <div class="form-group">
                     @Html.LabelFor(model => model.Book.ImageUrl, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
@@ -55,6 +55,7 @@
                     </div>
                 </div>
 
+                @*BOOK AVAILABILITY*@
                 <div class="form-group">
                     @Html.LabelFor(model => model.Book.Availability, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
@@ -63,6 +64,7 @@
                     </div>
                 </div>
 
+                @*BOOK PRICE*@
                 <div class="form-group">
                     @Html.LabelFor(model => model.Book.Price, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
@@ -71,6 +73,7 @@
                     </div>
                 </div>
 
+                @*DATE ADDED*@
                 <div class="form-group">
                     @Html.LabelFor(model => model.Book.DateAdded, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
@@ -79,6 +82,7 @@
                     </div>
                 </div>
 
+                @*BOOK GENRE*@
                 <div class="form-group">
                     @Html.LabelFor(model => model.Book.GenreID, "GenreID", htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
@@ -87,6 +91,7 @@
                     </div>
                 </div>
 
+                @*BOOK PUBLISHER*@
                 <div class="form-group">
                     @Html.LabelFor(model => model.Book.Publisher, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
@@ -95,6 +100,7 @@
                     </div>
                 </div>
 
+                @*BOOK PUBLICATION DATE*@
                 <div class="form-group">
                     @Html.LabelFor(model => model.Book.PublicationDate, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
@@ -103,6 +109,7 @@
                     </div>
                 </div>
 
+                @*BOOK PAGES*@
                 <div class="form-group">
                     @Html.LabelFor(model => model.Book.Pages, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
@@ -111,16 +118,19 @@
                     </div>
                 </div>
 
+                @*BOOK DESCRIPTION*@
                 <div class="form-group">
-                    @Html.LabelFor(model => model.Book.ProductDimensions, htmlAttributes: new { @class = "control-label col-md-2" })
+                    @Html.LabelFor(model => model.Book.Description, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
-                        @Html.EditorFor(model => model.Book.ProductDimensions, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.Book.ProductDimensions, "", new { @class = "text-danger" })
+                        @Html.TextAreaFor(model => model.Book.Description, new { @class = "form-control", style = "height: 260px;" })
+                        @Html.ValidationMessageFor(model => model.Book.Description, "", new { @class = "text-danger" })
                     </div>
                 </div>
+
             </fieldset>
         </div>
 
+        @*DISPLAYS BOOK IMAGE*@
         <div class="col-sm-2">
             <div>
                 <img src="@Model.Book.ImageUrl" alt="" style="width:100%; height:auto" />
@@ -128,12 +138,14 @@
         </div>
     </div>
     <br />
+
+
     <div class="form-group">
         <div class="col-md-10">
+            @Html.Partial("_GoBackButtonPartial")
             @*redirects to edit button partial*@
             @*ID is used to identify the book we are editing*@
             @Html.Partial("_EditButtonPartial", Model.Book.ID)
-            @Html.Partial("_GoBackButtonPartial")
         </div>
     </div>
 </div>

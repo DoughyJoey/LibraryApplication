@@ -100,6 +100,7 @@ namespace LibraryApplication.Models
         public ICollection<Membership> Memberships { get; set; }
 
         [Required]
+        [Display(Name = "Membership Type")]
         public int MembershipID { get; set; }
 
         [Required]
@@ -115,8 +116,9 @@ namespace LibraryApplication.Models
         public string Phone { get; set; }
 
         [Required]
-        [DateRangeAttrbute("01/01/1900")]
-        [Display(Name = "Birth Date")]
+        //sets date range to be between 01/01/1900 and todays date
+        [DateRangeAttrbute("01/01/1930")]
+        [Display(Name = "Date Of Birth")]
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:MM dd yyyy}")]
 

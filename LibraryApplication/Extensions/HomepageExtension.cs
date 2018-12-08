@@ -8,12 +8,14 @@ namespace LibraryApplication.Extensions
 {
     public static class HomepageExtensions
     {
+        //retruns a list of book thumbnails
         public static IEnumerable<HomepageModel> GetBookHomepage(this List<HomepageModel> homepages, ApplicationDbContext db = null, string search = null)
         {
             try
             {
                 if (db == null) db = ApplicationDbContext.Create();
 
+                //retrieves all books from the database
                 homepages = (from b in db.Books
                               select new HomepageModel
                               {
@@ -21,11 +23,14 @@ namespace LibraryApplication.Extensions
                                   Title = b.Title,
                                   Description = b.Description,
                                   ImageUrl = b.ImageUrl,
+                                  //links to book information controller
                                   Link = "/BookInformation/Index/" + b.ID,
                               }).ToList();
 
+                //if search is not null
                 if (search != null)
                 {
+                    //returns the book according to title
                     return homepages.Where(t => t.Title.ToLower().Contains(search.ToLower())).OrderBy(t => t.Title);
                 }
             }
@@ -33,6 +38,7 @@ namespace LibraryApplication.Extensions
             {
 
             }
+            //orders by the book title
             return homepages.OrderBy(t => t.Title);
 
         }

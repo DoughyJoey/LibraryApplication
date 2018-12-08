@@ -5,13 +5,13 @@
     ViewBag.Title = "Index";
 }
 
-<h3>Membership</h3>
+<h2><b>MEMBERSHIP</b></h2>
 
-<br/>
-
-<p>
     @Html.Partial("_CreateButtonPartial")
-</p>
+
+
+<br />
+<br />
 <table class="table table-condensed table-hover">
     <tr class="table-header">
         <th>
@@ -30,24 +30,25 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.SignUpFee)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ChargeRateSixMonth)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ChargeRateTwelveMonth)
-        </td>
-        <td>
-            @Html.Partial("_TableButtonPartial", new IndividualButtonPartial { MembershipID = item.ID})
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SignUpFee)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ChargeRateSixMonth)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ChargeRateTwelveMonth)
+            </td>
+            <td>
+                @Html.Partial("_TableButtonPartial", new IndividualButtonPartial { MembershipID = item.ID })
+            </td>
+        </tr>
+    }
 
 </table>

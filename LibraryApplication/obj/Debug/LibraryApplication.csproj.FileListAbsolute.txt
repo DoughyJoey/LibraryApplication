@@ -149,3 +149,4 @@ C:\Users\Sean\Desktop\Project\LibraryApplication\LibraryApplication\bin\PagedLis
 C:\Users\Sean\Desktop\Project\LibraryApplication\LibraryApplication\bin\PagedList.Mvc.dll
 C:\Users\Sean\Desktop\Project\LibraryApplication\LibraryApplication\bin\PagedList.xml
 C:\Users\Sean\Desktop\Project\LibraryApplication\LibraryApplication\bin\PagedList.Mvc.xml
+C:\Users\Sean\Desktop\Project\LibraryApplication\LibraryApplication\obj\Debug\LibraryApplication.Migrations.RemovedProductDimensionsFromBookModel.resources

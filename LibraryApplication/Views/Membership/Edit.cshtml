@@ -9,10 +9,9 @@
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <h3>Edit</h3>
-        <hr />
+        <h3><b>Edit</b></h3>
 
-        <div class="form-border">
+        <div class="form-border" style="border:3px solid #D9B9C8; border-radius:7px;">
 
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             @Html.HiddenFor(model => model.ID)
@@ -57,7 +56,7 @@
     <br/>
 
     <div>
-        <input type="submit" value="Save" class="btn btn-sm btn-primary" />
         @Html.Partial("_GoBackButtonPartial")
+        <input type="submit" value="Save" class="btn btn-sm btn-primary" />
     </div>
 }
