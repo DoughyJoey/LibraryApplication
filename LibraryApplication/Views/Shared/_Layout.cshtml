@@ -23,7 +23,12 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
+
+                    @*book status nav link*@
+                    @*opens the index action within the BookRentalController*@
                     <li>@Html.ActionLink("Book Status", "Index", "BookRental")</li>
+
+                    @*if the user is an Admin*@
                     @if (User.IsInRole(StaticDetails.AdminUserRole))
                     {
                         //includes the admin menu dropdown
@@ -39,7 +44,7 @@
         <hr />
     </div>
 
-    <footer class="footer">
+    <footer class="footer" style="background-color: #772953;">
         <div class="container">
             <p class="text-muted"></p>
         </div>

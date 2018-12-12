@@ -9,6 +9,7 @@ using LibraryApplication.Utility;
 
 namespace LibraryApplication.Controllers
 {
+    //only Admin can access this class
     [Authorize(Roles = StaticDetails.AdminUserRole)]
     public class GenreController : Controller
     {

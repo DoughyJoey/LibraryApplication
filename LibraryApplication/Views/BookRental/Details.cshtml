@@ -5,10 +5,15 @@
     ViewBag.Title = "Details";
 }
 
+@*FIELDS ARE NOT EDITABLE*@
 <fieldset disabled>
-    <h3>BookRent Details</h3>
-    <div class="row" style="border:1px solid #bbb9b9; border-radius:5px;">
+
+    <h3><b>Details</b></h3>
+
+    <div class="row" style="border:3px solid #D9B9C8; border-radius:7px;">
         <div class="col-sm-10">
+
+            @*SERIAL NUMBER*@
             <div class="row" style="padding-bottom:5px;padding-top:25px;">
                 <div class="col-sm-3">
                     @Html.LabelFor(m => m.ISBN, htmlAttributes: new { @class = "control-label" })
@@ -17,6 +22,8 @@
                     @Html.TextBoxFor(m => m.ISBN, new { @class = "form-control", enabled = "false" })
                 </div>
             </div>
+
+            @*TITLE*@
             <div class="row" style="padding-bottom:5px;padding-top:25px;">
                 <div class="col-sm-3">
                     @Html.LabelFor(m => m.Title, htmlAttributes: new { @class = "control-label" })
@@ -25,6 +32,8 @@
                     @Html.TextBoxFor(m => m.Title, new { @class = "form-control", enabled = "false" })
                 </div>
             </div>
+
+            @*RENTAL PRICE*@
             <div class="row" style="padding-bottom:5px;padding-top:25px;">
                 <div class="col-sm-3">
                     @Html.LabelFor(m => m.RentalPrice, htmlAttributes: new { @class = "control-label" })
@@ -33,6 +42,8 @@
                     @Html.TextBoxFor(m => m.RentalPrice, new { @class = "form-control", enabled = "false" })
                 </div>
             </div>
+
+            @*START DATE*@
             <div class="row" style="padding-bottom:5px;padding-top:25px;">
                 <div class="col-sm-3">
                     @Html.LabelFor(m => m.StartDate, htmlAttributes: new { @class = "control-label" })
@@ -41,6 +52,8 @@
                     @Html.TextBoxFor(m => m.StartDate, "{0:MM/dd/yyyy}", new { @class = "form-control", enabled = "false" })
                 </div>
             </div>
+
+            @*RETURN DATE*@
             <div class="row" style="padding-bottom:5px;padding-top:25px;">
                 <div class="col-sm-3">
                     @Html.LabelFor(m => m.ScheduledReturnDate, htmlAttributes: new { @class = "control-label" })
@@ -49,6 +62,8 @@
                     @Html.TextBoxFor(m => m.ScheduledReturnDate, "{0:MM/dd/yyyy}", new { @class = "form-control", enabled = "false" })
                 </div>
             </div>
+
+            @*ADDITIONAL CHARGE*@
             <div class="row" style="padding-bottom:5px;padding-top:25px;">
                 <div class="col-sm-3">
                     @Html.LabelFor(m => m.AdditionalCharge, htmlAttributes: new { @class = "control-label" })
@@ -57,6 +72,8 @@
                     @Html.TextBoxFor(m => m.AdditionalCharge, new { @class = "form-control", enabled = "false" })
                 </div>
             </div>
+
+            @*RENTAL DURATION*@
             <div class="row" style="padding-bottom:5px;padding-top:25px;">
                 <div class="col-sm-3">
                     @Html.LabelFor(m => m.RentalDuration, htmlAttributes: new { @class = "control-label" })
@@ -65,6 +82,8 @@
                     @Html.TextBoxFor(m => m.RentalDuration, new { @class = "form-control", enabled = "false" })
                 </div>
             </div>
+
+            @*NAME*@
             <div class="row" style="padding-bottom:5px;padding-top:25px;">
                 <div class="col-sm-3">
                     @Html.LabelFor(m => m.Name, htmlAttributes: new { @class = "control-label" })
@@ -73,6 +92,8 @@
                     @Html.TextBoxFor(m => m.Name, new { @class = "form-control", enabled = "false" })
                 </div>
             </div>
+
+            @*DATE OF BIRTH*@
             <div class="row" style="padding-bottom:5px;padding-top:25px;">
                 <div class="col-sm-3">
                     @Html.LabelFor(m => m.BirthDate, htmlAttributes: new { @class = "control-label" })
@@ -81,6 +102,8 @@
                     @Html.TextBoxFor(m => m.BirthDate, "{0:MM/dd/yyyy}", new { @class = "form-control", enabled = "false" })
                 </div>
             </div>
+
+            @*EMAIL*@
             <div class="row" style="padding-bottom:5px;padding-top:25px;">
                 <div class="col-sm-3">
                     @Html.LabelFor(m => m.Email, htmlAttributes: new { @class = "control-label" })
@@ -90,13 +113,21 @@
                 </div>
             </div>
 
+            <br/>
+
         </div>
+
+        @*BOOK IMAGE*@
         <div class="col-sm-2">
             <div class="image-book">
-                <img class="thumbnail-img" src="@Model.ImageUrl" alt="" style="width:100%;height:auto;" />
+                <img class="homepage-img" src="@Model.ImageUrl" alt="" style="width:100%;height:auto;" />
             </div>
         </div>
     </div>
 </fieldset>
 <br />
+
+@*GO BACK BUTTON*@
 <p>@Html.Partial("_GoBackButtonPartial")</p> 
+
+<br/>

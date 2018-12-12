@@ -12,6 +12,7 @@ using LibraryApplication.ViewModel;
 
 namespace LibraryApplication.Controllers
 {
+    //only Admin can access this class
     [Authorize(Roles = StaticDetails.AdminUserRole)]
     public class BookController : Controller
     {
@@ -50,11 +51,14 @@ namespace LibraryApplication.Controllers
         // GET: Book/Create
         public ActionResult Create()
         {
+
             var genre = db.Genres.ToList();
             var model = new BookViewModel
+
             {
                 Genres = genre
             };
+
             return View(model);
         }
 

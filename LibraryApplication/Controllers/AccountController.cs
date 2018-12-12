@@ -145,6 +145,7 @@ namespace LibraryApplication.Controllers
             {
                 RegisterViewModel newUser = new RegisterViewModel
                 {
+                    //retrieves everything from the database that is not an AdminUserRole
                     Memberships = db.Memberships.Where(m=>!m.Name.ToLower().Equals(StaticDetails.AdminUserRole.ToLower())).ToList(),
                     BirthDate = DateTime.Now
                 };

@@ -1,17 +1,12 @@
-﻿.homepage {
-    transition: all 1s ease-in-out 0s;
-}
-
-.homepage .homepage-img {
-    /*specifies a transition effect with a slow start and end*/
-    transition: ease-in-out all 1s;
+﻿.homepage .homepage-img {
     height: auto;
+    /*slow transition makes image ease in and out*/
+    transition: ease-in-out all 1s;
     width: 100%;
 }
 
-/*The overflow is clipped, and the rest of the content will be invisible*/
-.homepage .homepage-img-container {
-    overflow: hidden;
+.homepage {
+    transition: all 1s ease-in-out 0s;
 }
 
 .homepage a, a:focus, a:hover, a:active {
@@ -28,8 +23,13 @@
 
 .homepage:hover {
     transition: box-shadow 0.3s ease-in-out 0s;
-    /*adds purple shadow styling around box*/
+    /*adds light purple shadow styling around box*/
     box-shadow: 8px 8px 8px #D9B9C8;
+}
+
+/*overflow datalist clipped and the rest of the content is invisible*/
+.homepage .homepage-img-container {
+    overflow: hidden;
 }
 
 

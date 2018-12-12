@@ -20,7 +20,8 @@ namespace LibraryApplication.Controllers
         {
             db = ApplicationDbContext.Create();
         }
-        // GET: BookDetail
+
+        // GET: BOOK INFORMATION
         public ActionResult Index(int id)
         {
             var userid = User.Identity.GetUserId();
@@ -29,8 +30,11 @@ namespace LibraryApplication.Controllers
             var rentalPrice = 0.0;
             var sixMonthRental = 0.0;
             var twelveMonthRental = 0.0;
+
+            //if the user is not an admin
             if (userid != null && !User.IsInRole(StaticDetails.AdminUserRole))
             {
+                //retrieves the charge rates for 6 months and 12 months
                 var chargeRate = from u in db.Users
                                  join m in db.Memberships on u.MembershipID equals m.ID
                                  where u.Id.Equals(userid)
@@ -38,8 +42,10 @@ namespace LibraryApplication.Controllers
                 sixMonthRental = Convert.ToDouble(bookModel.Price) * Convert.ToDouble(chargeRate.ToList()[0].ChargeRateSixMonth) / 100;
                 twelveMonthRental = Convert.ToDouble(bookModel.Price) * Convert.ToDouble(chargeRate.ToList()[0].ChargeRateTwelveMonth) / 100;
             }
+
             BookRentalViewModel model = new BookRentalViewModel
             {
+
                 BookID = bookModel.ID,
                 ISBN = bookModel.ISBN,
                 Author = bookModel.Author,
@@ -63,6 +69,8 @@ namespace LibraryApplication.Controllers
             };
             return View(model);
         }
+
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)

@@ -1,22 +1,26 @@
-﻿.image-book{
-    padding-top:50px;
+﻿/*heading styling*/
+.product-details-heading {
+    padding-top: 40px;
 }
 
+/*book description styling*/
+.content-book-product-details {
+    padding-top: 50px;
+    border-left: 2px solid #bebebe;
+}
+
+/*main content styling*/
 .content-book-main{
     padding-top: 30px;
     text-align: justify;
 }
 
-.content-book-title-author{
-    border-bottom: 1px solid #b1b1b1;
+/*book author styling*/
+.content-book-title-author {
+    border-bottom: 2px solid #bebebe;
 }
 
-.content-book-product-details{
-    border-left: 1px solid #b1b1b1;
+/*book image styling*/
+.image-book {
     padding-top: 50px;
-}
-
-.product-details-heading{
-    color: #0082ff;
-    padding-top: 40px;
 }

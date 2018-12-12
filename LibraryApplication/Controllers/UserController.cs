@@ -178,6 +178,7 @@ using System.Web.Mvc;
 
 namespace LibraryApplication.Controllers
 {
+    //only Admin can access this class
     [Authorize(Roles = StaticDetails.AdminUserRole)]
     public class UserController : Controller
     {

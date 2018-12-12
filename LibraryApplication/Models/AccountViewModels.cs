@@ -14,15 +14,16 @@ namespace LibraryApplication.Models
         public string Phone { get; set; }
 
         [Required]
-        [Display(Name = "Birth Date")]
+        [Display(Name = "Date Of Birth")]
         [DataType(DataType.Date)]
-        [DateRangeAttrbute("01/01/1900")]
+        [DateRangeAttrbute("01/01/1930")]
         public DateTime BirthDate { get; set; }
         public bool? Disable { get; set; }
 
         public ICollection<Membership> Memberships { get; set; }
 
         [Required]
+        [Display(Name = "Membership Type")]
         public int MembershipID { get; set; }
     }
 

@@ -10,9 +10,13 @@
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <h3>Add New Book</h3>
+        <h3><b>Add Book</b></h3>
         <hr />
+
+
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        @*EMAIL*@
         <div class="form-group">
             @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -20,6 +24,8 @@
                 @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
             </div>
         </div>
+
+        @*TITLE*@
         <div class="form-group">
             @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -27,6 +33,8 @@
                 @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
             </div>
         </div>
+
+        @*SERIAL NUMBER*@
         <div class="form-group">
             @Html.LabelFor(model => model.ISBN, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -35,6 +43,7 @@
             </div>
         </div>
 
+        @*DROPDOWN FOR SEIX MONTH OR TWELVE MONTH RENTAL*@
         @{
             List<SelectListItem> listItem = new List<SelectListItem>();
             listItem.Add(new SelectListItem
@@ -49,6 +58,8 @@
             });
 
         }
+
+        @*DURATION*@
         <div class="form-group">
             @Html.LabelFor(model => model.RentalDuration, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -57,20 +68,27 @@
             </div>
         </div>
 
+        @*MAKES SURE BELOW FIELDS ARE NOT VISIBLE*@
         <div id="nameAndDob" style="display:none">
 
+
+            @*NAME*@
             <div class="form-group">
                 @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
                     @Html.Label(" ", new { id = "firstName", style = "width:350px;", @class = "form-control" })
                 </div>
             </div>
+
+            @*DATE OF BIRTH*@
             <div class="form-group">
                 @Html.LabelFor(model => model.BirthDate, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
                     @Html.Label(" ", new { id = "birthDate", style = "width:350px;", @class = "form-control" })
                 </div>
             </div>
+
+            @*RENTAL PRICE*@
             <div class="form-group">
                 @Html.LabelFor(model => model.RentalPrice, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
@@ -80,6 +98,7 @@
                 </div>
             </div>
 
+            @*AVAILABILITY*@
             <div class="form-group">
                 @Html.LabelFor(model => model.Availability, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
@@ -88,6 +107,8 @@
             </div>
         </div>
 
+        @*CHECK AVAILABILITY BUTTON*@
+        @*RESERVE BUTTON*@
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="button" value="Check Avaibility" id="btnAvailibility" class="btn btn-sm btn-success" />
@@ -98,25 +119,34 @@
     </div>
 }
 
+@*WEB API CALL USING JAVASCRIPT*@
+
 @section scripts{
 
     <script>
         $(document).ready(function () {
+
+            //EMAIL
             var customers = new Bloodhound({
-                datumTokenizer: Bloodhound.tokenizers.obj.whitespace('email'),
+                datumTokenizer: Bloodhound.tokenizers.obj.whitespace('email'), //applied on the email input
                 queryTokenizer: Bloodhound.tokenizers.whitespace,
                 // `states` is an array of state names defined in "The Basics"
                 remote: {
+                    //whats passed into the email input will be passed to the API
                     url: '/API/UsersAPI?type=email&query=%QUERY',
                     wildcard: '%QUERY'
                 }
             });
+
+            //minLength is minimum amount of characters that have to be typed
             $('#email').typeahead({ highlight: true, minLength: 3 },
                 {
                     name: 'customers',
                     display: 'Email',
                     source: customers
                 });
+
+            //BOOK TITLE
             var bookTitle = new Bloodhound({
                 datumTokenizer: Bloodhound.tokenizers.obj.whitespace('Title'),
                 queryTokenizer: Bloodhound.tokenizers.whitespace,
@@ -134,20 +164,28 @@
                 });
         });
 
-
+        //AVAILABILITY
+        //CALLS BUTTON CLICK FUNCTION
         $('#btnAvailibility').click(function () {
+            //retrieves isbn, email, and rental duration values
             var isbn = document.getElementById("bookISBN").value;
             var email = document.getElementById("email").value;
             var rentalDuration = document.getElementById("ddlRentalDuration").value;
+
+            //ajax call to BookAPI to check availability
             $.ajax({
                 url: '/api/BookAPI?type=avail&isbn=' + isbn,
                 type: 'GET',
                 dataType: 'json',
                 success: function (data, textStatus, xhr) {
+                    //returns how many books are available
                     $('#lblAvaibility').text(data + ' available')
+
+                    //if books are available, display the reserve button
                     if (data > 0) {
                         document.getElementById('btnSubmit').style.display = '';
                     }
+                    //else, display a Not Available button
                     else {
                         document.getElementById('btnSubmit').value = "Not Available";
                         document.getElementById('btnSubmit').style.display = '';
@@ -159,16 +197,23 @@
                 error: function (xhr, textStatus, errorThrown) {
                 }
             });
+
+            //PRICE
             $.ajax({
+                //retrieves serial number, rental duration, and email
                 url: '/api/BookAPI?type=price&isbn=' + isbn + '&rentalDuration=' + rentalDuration + '&email=' + email,
                 type: 'GET',
                 dataType: 'json',
                 success: function (data, textStatus, xhr) {
+                    //rental price label
                     $('#lblRentalPrice').text(data)
                 },
                 error: function (xhr, textStatus, errorThrown) {
                 }
             });
+
+            //NAME & DATE OF BIRTH
+            //RETRIEVES FIRST NAME AND LAST NAME USING EMAIL
             $.ajax({
                 url: '/api/UsersAPI?type=name&query=' + email,
                 type: 'GET',
@@ -178,7 +223,9 @@
                     $('#firstName').text(fields[0])
                     var birthDate = fields[1].split(' ')
                     $('#birthDate').text(birthDate[0])
+                    //hides check availability button
                     document.getElementById("btnAvailibility").style.display = 'none';
+                    //display hidden div of name, date of birth, price, and availability
                     document.getElementById("nameAndDob").style.display = '';
                 },
                 error: function (xhr, textStatus, errorThrown) {
