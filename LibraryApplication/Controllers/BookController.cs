@@ -29,16 +29,22 @@ namespace LibraryApplication.Controllers
         // GET: Book/Details/5
         public ActionResult Details(int? ID)
         {
+            //if ID does not exist return bad request
             if (ID == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
+            //finds book in DB using ID
             Book book = db.Books.Find(ID);
+
+            //if book not found return not found
             if (book == null)
             {
                 return HttpNotFound();
             }
 
+            //store Book and Genre in model and return to view
             var model = new BookViewModel
             {
                 Book = book,
@@ -51,8 +57,10 @@ namespace LibraryApplication.Controllers
         // GET: Book/Create
         public ActionResult Create()
         {
-
+            //retrieves Genres and stores in genre
             var genre = db.Genres.ToList();
+
+
             var model = new BookViewModel
 
             {

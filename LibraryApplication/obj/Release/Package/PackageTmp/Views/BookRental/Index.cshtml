@@ -1,0 +1,230 @@
+﻿@model IPagedList<LibraryApplication.ViewModel.BookRentalViewModel>
+@*PageList enables the use of pagination*@
+@using PagedList
+@using PagedList.Mvc
+@using LibraryApplication.Utility
+@using LibraryApplication.Models
+@{
+    ViewBag.Title = "Index";
+}
+
+@*get method for form*@
+@using (Html.BeginForm("Index", "BookRental", FormMethod.Get))
+{
+
+<br />
+<div class="row">
+    <div class="col-sm-4">
+
+        <h2><b>Book Rental</b></h2>
+
+        @*if the user is an admin display the create button*@
+        @if (User.IsInRole(StaticDetails.AdminUserRole))
+        {
+            <p>
+                @Html.Partial("_CreateButtonPartial")
+            </p>
+        }
+
+
+    </div>
+
+    <div class="col-sm-8 pull-right">
+        <div class="row">
+            <div class="col-sm-12 text-right">
+            </div>
+        </div>
+    </div>
+</div>
+<br />
+
+
+<table class="table table-condensed table-hover">
+    <tr class="table-header">
+        @*TABLE HEADERS*@
+        <th></th>
+        <th></th>
+        <th>
+            @Html.DisplayNameFor(m => m.First().Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(m => m.First().Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(m => m.First().StartDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(m => m.First().ScheduledReturnDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(m => m.First().RentalPrice)
+        </th>
+        <th>
+            @Html.DisplayNameFor(m => m.First().RentalDuration)
+        </th>
+        <th>
+            @Html.DisplayNameFor(m => m.First().Status)
+        </th>
+        <th></th>
+        <th></th>
+    </tr>
+
+
+    @*iterates through model and displays information*@
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.HiddenFor(m => item.UserID)
+            </td>
+            <td>
+                @Html.HiddenFor(m => item.BookID)
+            </td>
+            <td>
+                @Html.DisplayFor(m => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(m => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(m => item.StartDate)
+            </td>
+            <td>
+                @Html.DisplayFor(m => item.ScheduledReturnDate)
+            </td>
+            <td>
+                @Html.DisplayFor(m => item.RentalPrice)
+            </td>
+            <td>
+                @Html.DisplayFor(m => item.RentalDuration)
+            </td>
+            <td>
+                @Html.DisplayFor(m => item.Status)
+            </td>
+            <td>
+
+                @*DETAILS*@
+                @Html.Partial("_IndividualButtonPartial", new IndividualButtonPartial
+           {
+               Action = "Details",
+               ButtonType = "btn-success",
+               Glyph = "list",
+               Text = "Details",
+               BookID = null,
+               CustomerID = null,
+               GenreID = null,
+               MembershipID = null,
+               UserID = null,
+               BookRentalID = item.ID
+           })
+            </td>
+            <td>
+
+                @if (item.Status.ToString().ToLower().Equals(StaticDetails.RequestedLower) && User.IsInRole(StaticDetails.AdminUserRole))
+                {
+                    //DECLINE BUTTON
+                    @Html.Partial("_IndividualButtonPartial", new IndividualButtonPartial
+                    {
+                       Action = "Decline",
+                       ButtonType = "btn-danger",
+                       Glyph = "remove",
+                       Text = "Decline",
+                       BookID = null,
+                       CustomerID = null,
+                       GenreID = null,
+                       MembershipID = null,
+                       UserID = null,
+                       BookRentalID = item.ID
+
+                    })
+
+                    //APPROVE BUTTON
+                    @Html.Partial("_IndividualButtonPartial", new IndividualButtonPartial
+                   {
+                      Action = "Approve",
+                      ButtonType = "btn-primary",
+                      Glyph = "ok",
+                      Text = "Approve",
+                      BookID = null,
+                      CustomerID = null,
+                      GenreID = null,
+                      MembershipID = null,
+                      UserID = null,
+                      BookRentalID = item.ID
+                   })
+
+                }
+                else
+                {
+                    //if the status is requested and it is an EndUserRole, show the delete button
+                    if ((item.Status.ToString().ToLower().Equals(StaticDetails.RequestedLower) && (User.IsInRole(StaticDetails.EndUserRole))) ||
+                        //if status is not closed and user is admin, show delete button
+                        (User.IsInRole(StaticDetails.AdminUserRole) && !item.Status.ToString().ToLower().Equals(StaticDetails.ClosedLower)))
+                    {
+                        //DELETE BUTTON
+                        @Html.Partial("_IndividualButtonPartial", new IndividualButtonPartial
+                        {
+                            Action = "Delete",
+                            ButtonType = "btn-danger",
+                            Glyph = "trash",
+                            Text = "Delete",
+                            BookID = null,
+                            CustomerID = null,
+                            GenreID = null,
+                            MembershipID = null,
+                            UserID = null,
+                            BookRentalID = item.ID
+                        })
+                    }
+
+
+                    if (item.Status.ToString().ToLower().Equals(StaticDetails.ApprovedLower) && User.IsInRole(StaticDetails.AdminUserRole))
+                    {
+                        //PICKUP BUTTON
+                        @Html.Partial("_IndividualButtonPartial", new IndividualButtonPartial
+                        {
+                            Action = "PickUp",
+                            ButtonType = "btn-primary",
+                            Glyph = "share-alt",
+                            Text = "PickUp",
+                            BookID = null,
+                            CustomerID = null,
+                            GenreID = null,
+                            MembershipID = null,
+                            UserID = null,
+                            BookRentalID = item.ID
+                        })
+                    }
+
+
+                    else
+                    {
+                        if (item.Status.ToString().ToLower().Equals(StaticDetails.RentedLower) && User.IsInRole(StaticDetails.AdminUserRole))
+                        {
+                            //RETURN BUTTON
+                            @Html.Partial("_IndividualButtonPartial", new IndividualButtonPartial
+                            {
+                                Action = "Return",
+                                ButtonType = "btn-primary",
+                                Glyph = "retweet",
+                                Text = "Return",
+                                BookID = null,
+                                CustomerID = null,
+                                GenreID = null,
+                                MembershipID = null,
+                                UserID = null,
+                                BookRentalID = item.ID
+                            })
+                        }
+                    }
+                }
+
+            </td>
+        </tr>
+    }
+</table>
+
+//used for pagination
+@Html.PagedListPager(Model,pageNumber=>Url.Action("Index",new { pageNumber }))
+}
+

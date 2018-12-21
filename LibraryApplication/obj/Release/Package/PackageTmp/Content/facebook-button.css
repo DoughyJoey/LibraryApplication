@@ -1,0 +1,17 @@
+﻿/*hover button styling*/
+.btn-facebook:hover {
+    border-color: rgba(0,0,0,0.2);
+    /*darker shade of blue while hovering*/
+    background-color: #2d4373;
+    color: #fff;
+}
+
+/*facebook button styling*/
+.btn-facebook {
+    color: #fff;
+    border-color: rgba(0,0,0,0.2);
+    /*lighter shade of blue while hovering*/
+    background-color: #3b5998;
+}
+
+

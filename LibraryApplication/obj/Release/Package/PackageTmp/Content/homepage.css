@@ -1,0 +1,36 @@
+﻿.homepage .homepage-img {
+    height: auto;
+    /*slow transition makes image ease in and out*/
+    transition: ease-in-out all 1s;
+    width: 100%;
+}
+
+.homepage {
+    transition: all 1s ease-in-out 0s;
+}
+
+.homepage a, a:focus, a:hover, a:active {
+    /*removes underline from book title*/
+    text-decoration: none;
+    outline: 0px none !important;
+}
+
+.homepage :hover img {
+    /*changes scale of image and rotates it to -3 degrees*/
+    transform: scale(0.9) rotate(-3deg);
+}
+
+
+.homepage:hover {
+    transition: box-shadow 0.3s ease-in-out 0s;
+    /*adds light purple shadow styling around box*/
+    box-shadow: 8px 8px 8px #D9B9C8;
+}
+
+/*overflow datalist clipped and the rest of the content is invisible*/
+.homepage .homepage-img-container {
+    overflow: hidden;
+}
+
+
+

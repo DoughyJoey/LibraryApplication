@@ -1,0 +1,154 @@
+﻿@model LibraryApplication.ViewModel.BookViewModel
+
+@{
+    ViewBag.Title = "Details";
+}
+
+
+<div class="form-horizontal">
+    <h3><b>Details</b></h3>
+    <br />
+
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.Book.ID)
+
+    <div class="row" style="border:3px solid #D9B9C8; border-radius:7px;">
+        <br />
+        <div class="col-sm-10">
+
+            @*fieldset disabled stops user from editing information*@
+            <fieldset disabled>
+
+                @*BOOK ID*@
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Book.ISBN, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Book.ISBN, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Book.ISBN, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                @*BOOK TITLE*@
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Book.Title, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Book.Title, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Book.Title, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                @*BOOK AUTHOR*@
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Book.Author, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Book.Author, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Book.Author, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                @*IMAGE URL FOR BOOK*@
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Book.ImageUrl, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Book.ImageUrl, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Book.ImageUrl, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                @*BOOK AVAILABILITY*@
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Book.Availability, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Book.Availability, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Book.Availability, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                @*BOOK PRICE*@
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Book.Price, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Book.Price, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Book.Price, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                @*DATE ADDED*@
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Book.DateAdded, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(model => model.Book.DateAdded, "{0:MM/dd/yyyy}", new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.Book.DateAdded, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                @*BOOK GENRE*@
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Book.GenreID, "GenreID", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownListFor(model => model.Book.GenreID, new SelectList(Model.Genres, "ID", "Name"), new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.Book.GenreID, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                @*BOOK PUBLISHER*@
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Book.Publisher, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Book.Publisher, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Book.Publisher, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                @*BOOK PUBLICATION DATE*@
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Book.PublicationDate, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(model => model.Book.PublicationDate, "{0:MM/dd/yyyy}", new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.Book.PublicationDate, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                @*BOOK PAGES*@
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Book.Pages, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Book.Pages, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Book.Pages, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                @*BOOK DESCRIPTION*@
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Book.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextAreaFor(model => model.Book.Description, new { @class = "form-control", style = "height: 260px;" })
+                        @Html.ValidationMessageFor(model => model.Book.Description, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+            </fieldset>
+        </div>
+
+        @*DISPLAYS BOOK IMAGE*@
+        <div class="col-sm-2">
+            <div>
+                <img src="@Model.Book.ImageUrl" alt="" style="width:100%; height:auto" />
+            </div>
+        </div>
+    </div>
+    <br />
+
+
+    <div class="form-group">
+        <div class="col-md-10">
+            @Html.Partial("_GoBackButtonPartial")
+            @*redirects to edit button partial*@
+            @*ID is used to identify the book we are editing*@
+            @Html.Partial("_EditButtonPartial", Model.Book.ID)
+        </div>
+    </div>
+</div>
+
+<br />
+<br />

@@ -1,0 +1,24 @@
+﻿@*Navigation menu for admin*@
+@*javascript file AdminMenu.js used to provide functionality*@
+
+@*When user hovers over admin menu a dropdown appears*@
+<li class="dropdown" data-admin-menu>
+    <a href="#">
+        Administrator
+
+
+        @*Displays a arrow in the direction the the dropdown will appear*@
+        <span class="glyphicon glyphicon-menu-down"></span>
+    </a>
+    <ul class="dropdown-menu">
+        @*divider places a divider between categories*@
+        <li class="divider"></li>
+
+        <li><a href="/Membership">&nbsp;&nbsp; Membership</a></li>
+        <li><a href="/Genre">&nbsp;&nbsp; Genre</a></li>
+        <li><a href="/Book">&nbsp;&nbsp; Book</a></li>
+        <li><a href="/User">&nbsp;&nbsp; Users</a></li>
+
+        <li class="divider"></li>
+    </ul>
+</li>

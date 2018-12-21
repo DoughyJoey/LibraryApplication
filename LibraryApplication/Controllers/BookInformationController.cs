@@ -39,10 +39,13 @@ namespace LibraryApplication.Controllers
                                  join m in db.Memberships on u.MembershipID equals m.ID
                                  where u.Id.Equals(userid)
                                  select new { m.ChargeRateSixMonth, m.ChargeRateTwelveMonth };
+
+                //calculates the price of 6 month and 12 month charge rates
                 sixMonthRental = Convert.ToDouble(bookModel.Price) * Convert.ToDouble(chargeRate.ToList()[0].ChargeRateSixMonth) / 100;
                 twelveMonthRental = Convert.ToDouble(bookModel.Price) * Convert.ToDouble(chargeRate.ToList()[0].ChargeRateTwelveMonth) / 100;
             }
 
+            //converts BookRentalViewModel in object model and returns to view
             BookRentalViewModel model = new BookRentalViewModel
             {
 

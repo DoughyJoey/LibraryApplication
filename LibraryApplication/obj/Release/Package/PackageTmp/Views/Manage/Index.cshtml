@@ -1,0 +1,106 @@
+﻿@model LibraryApplication.Models.IndexViewModel
+@{
+    ViewBag.Title = "Manage";
+}
+
+<h2><b>Manage Profile</b></h2>
+
+<div>
+    <br/>
+    <div class="form-horizontal">
+        <div class="form-border">
+            <div class="form-group">
+                <div class="col-md-2"></div>
+                <div class="col-md-10">
+
+                    @if (Model.HasPassword)
+                    {
+                        //CHANGE PASSWORD BUTTON
+                        <a type="button" class="btn btn-sm btn-success" href="@Url.Action("ChangePassword")">
+                            <span class="glyphicon glyphicon-pencil"></span>
+                            <span>Change Password</span>
+                        </a>
+                    }
+                    else
+                    {
+                        //CREATE PASSWORD BUTTON
+                        <a type="button" class="btn btn-sm btn-success" href="@Url.Action("SetPassword")">
+                            <span class="glyphicon glyphicon-pencil"></span>
+                            <span>Create Password</span>
+                        </a>
+                    }
+                    &nbsp;&nbsp;
+
+                    @*//MANAGE EXTERNAL LOGINS (FACEBOOK)*@
+                    <a type="button" class="btn btn-sm btn-success" href="@Url.Action("ManageLogins")">
+                        <span class="glyphicon glyphicon-pencil"></span>
+                        <span>Manage External Logins</span>
+                    </a>
+                </div>
+            </div>
+
+            @*NOT EDITABLE*@
+            <fieldset disabled>
+
+                @*FIRST NAME*@
+                <div class="form-group">
+                    @Html.LabelFor(m => m.FirstName, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(m => m.FirstName, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                </div>
+
+                @*LAST NAME*@
+                <div class="form-group">
+                    @Html.LabelFor(m => m.LastName, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(m => m.LastName, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                </div>
+
+                @*EMAIL*@
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(m => m.Email, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                </div>
+
+                @*PHONE NUMBER*@
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Phone, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(m => m.Phone, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                </div>
+
+                @*DATE OF BIRTH*@
+                <div class="form-group">
+                    @Html.LabelFor(m => m.BirthDate, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(m => m.BirthDate, "{0:MM/dd/yyyy}", new { @class = "form-control" })
+                    </div>
+                </div>
+
+                @*MEMBERSHIP TYPE*@
+                <div class="form-group">
+                    @Html.LabelFor(m => m.MembershipID, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownListFor(m => m.MembershipID, new SelectList(Model.Memberships, "id", "name"), new { @class = "form-control" })
+                    </div>
+                </div>
+
+            </fieldset>
+
+            @*EDIT BUTTON*@
+            <div class="col-md-offset-2">
+                @Html.ActionLink("Edit", "Edit", "Manage", null, new { @class = "btn btn-sm btn-primary" })
+            </div>
+            <br/>
+        </div>
+    </div>
+</div>
+
+<br/>
+<br/>
+

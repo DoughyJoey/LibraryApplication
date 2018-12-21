@@ -1,0 +1,64 @@
+﻿@model IEnumerable<LibraryApplication.Models.Book>
+@using LibraryApplication.Models
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2><b>BOOKS</b></h2>
+
+    @*reference to the create button partial*@
+    @Html.Partial("_CreateButtonPartial")
+
+<br />
+<br />
+<table class="table table-condensed table-hover">
+    <tr class="table-header">
+        @*displays all the table headings to the user*@
+        <th>
+            @Html.DisplayNameFor(model => model.ISBN)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Availability)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Price)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Genre.Name)
+        </th>
+        <th></th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ISBN)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Availability)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Genre.Name)
+            </td>
+            <td>
+                @*displays all the buttons from the partial view*@
+                @Html.Partial("_TableButtonPartial", new IndividualButtonPartial { BookID = item.ID })
+            </td>
+        </tr>
+    }
+
+</table>
+
+<br />
+<br />

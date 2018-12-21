@@ -1,0 +1,54 @@
+﻿@model LibraryApplication.Models.IndividualButtonPartial
+@using LibraryApplication.Models
+
+@*displays edit, details & delete buttons for tables*@
+
+<td style="width:250px;">
+    <div class="btn-group" role="group" style="padding-top: 3px; padding-bottom: 3px;">
+        <div>
+            @Html.Partial("_IndividualButtonPartial",
+                  new IndividualButtonPartial
+                  {
+                      Action="Edit",
+                      ButtonType="btn-primary",
+                      Glyph= "edit",
+                      Text="Edit",
+                      GenreID= Model.GenreID,
+                      BookID = Model.BookID,
+                      UserID = Model.UserID,
+                      CustomerID = Model.CustomerID,
+                      MembershipID = Model.MembershipID
+                  })
+       
+            @Html.Partial("_IndividualButtonPartial",
+                  new IndividualButtonPartial
+                  {
+                      Action="Details",
+                      ButtonType="btn-success",
+                      Glyph="list",
+                      Text="Details",
+                      GenreID = Model.GenreID,
+                      BookID = Model.BookID,
+                      UserID = Model.UserID,
+                      CustomerID = Model.CustomerID,
+                      MembershipID = Model.MembershipID
+                  })
+
+            @Html.Partial("_IndividualButtonPartial",
+                  new IndividualButtonPartial
+                  {
+                      Action="Delete",
+                      ButtonType="btn-danger",
+                      Glyph="trash",
+                      Text="Delete",
+                      GenreID = Model.GenreID,
+                      BookID = Model.BookID,
+                      UserID = Model.UserID,
+                      CustomerID = Model.CustomerID,
+                      MembershipID = Model.MembershipID
+                  })
+        </div>
+    </div>
+</td>
+
+

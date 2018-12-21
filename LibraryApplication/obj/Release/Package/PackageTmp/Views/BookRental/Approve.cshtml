@@ -1,0 +1,151 @@
+﻿@model LibraryApplication.ViewModel.BookRentalViewModel
+@{
+    ViewBag.Title = "Approve";
+}
+
+@*actionName in BookViewModel decides which button to display to the user*@
+@using (Html.BeginForm(Model.actionName, "BookRental"))
+{
+    @Html.AntiForgeryToken();
+
+    <h3><b>Approve</b></h3>
+
+    <div class="row" style="border:3px solid #D9B9C8; border-radius:7px;">
+
+
+        <div class="col-sm-10">
+            <fieldset disabled>
+
+                @*SERIAL NUMBER*@
+                <div class="row" style="padding-bottom:5px;padding-top:25px;">
+                    <div class="col-sm-3">
+                        @Html.LabelFor(m => m.ISBN, htmlAttributes: new { @class = "control-label" })
+                    </div>
+                    <div class="col-sm-9">
+                        @Html.TextBoxFor(m => m.ISBN, new { @class = "form-control", enabled = "false" })
+                    </div>
+                </div>
+
+                @*TITLE*@
+                <div class="row" style="padding-bottom:5px;padding-top:25px;">
+                    <div class="col-sm-3">
+                        @Html.LabelFor(m => m.Title, htmlAttributes: new { @class = "control-label" })
+                    </div>
+                    <div class="col-sm-9">
+                        @Html.TextBoxFor(m => m.Title, new { @class = "form-control", enabled = "false" })
+                    </div>
+                </div>
+
+                @*RENTAL PRICE*@
+                <div class="row" style="padding-bottom:5px;padding-top:25px;">
+                    <div class="col-sm-3">
+                        @Html.LabelFor(m => m.RentalPrice, htmlAttributes: new { @class = "control-label" })
+                    </div>
+                    <div class="col-sm-9">
+                        @Html.TextBoxFor(m => m.RentalPrice, new { @class = "form-control", enabled = "false" })
+                    </div>
+                </div>
+
+                @*START DATE*@
+                <div class="row" style="padding-bottom:5px;padding-top:25px;">
+                    <div class="col-sm-3">
+                        @Html.LabelFor(m => m.StartDate, htmlAttributes: new { @class = "control-label" })
+                    </div>
+                    <div class="col-sm-9">
+                        @Html.TextBoxFor(m => m.StartDate, "{0:MM/dd/yyyy}", new { @class = "form-control", enabled = "false" })
+                    </div>
+                </div>
+
+                @*RETURN DATE*@
+                <div class="row" style="padding-bottom:5px;padding-top:25px;">
+                    <div class="col-sm-3">
+                        @Html.LabelFor(m => m.ScheduledReturnDate, htmlAttributes: new { @class = "control-label" })
+                    </div>
+                    <div class="col-sm-9">
+                        @Html.TextBoxFor(m => m.ScheduledReturnDate, "{0:MM/dd/yyyy}", new { @class = "form-control", enabled = "false" })
+                    </div>
+                </div>
+
+            </fieldset>
+
+            @*only show this div if actionName="return"*@
+            @if (Model.actionName.ToLower().Equals("return"))
+            {
+                <div class="row" style="padding-bottom:5px;padding-top:25px;">
+                    <div class="col-sm-3">
+                        @Html.LabelFor(m => m.AdditionalCharge, htmlAttributes: new { @class = "control-label" })
+                    </div>
+                    <div class="col-sm-9">
+                        @Html.TextBoxFor(m => m.AdditionalCharge, new { @class = "form-control", enabled = "false" })
+                    </div>
+                </div>
+            }
+
+
+            <fieldset disabled>
+
+                @*DURATION*@
+                <div class="row" style="padding-bottom:5px;padding-top:25px;">
+                    <div class="col-sm-3">
+                        @Html.LabelFor(m => m.RentalDuration, htmlAttributes: new { @class = "control-label" })
+                    </div>
+                    <div class="col-sm-9">
+                        @Html.TextBoxFor(m => m.RentalDuration, new { @class = "form-control", enabled = "false" })
+                    </div>
+                </div>
+
+                @*NAME*@
+                <div class="row" style="padding-bottom:5px;padding-top:25px;">
+                    <div class="col-sm-3">
+                        @Html.LabelFor(m => m.Name, htmlAttributes: new { @class = "control-label" })
+                    </div>
+                    <div class="col-sm-9">
+                        @Html.TextBoxFor(m => m.Name, new { @class = "form-control", enabled = "false" })
+                    </div>
+                </div>
+
+                @*DATE OF BIRTH*@
+                <div class="row" style="padding-bottom:5px;padding-top:25px;">
+                    <div class="col-sm-3">
+                        @Html.LabelFor(m => m.BirthDate, htmlAttributes: new { @class = "control-label" })
+                    </div>
+                    <div class="col-sm-9">
+                        @Html.TextBoxFor(m => m.BirthDate, "{0:MM/dd/yyyy}", new { @class = "form-control", enabled = "false" })
+                    </div>
+                </div>
+
+                @*EMAIL*@
+                <div class="row" style="padding-bottom:5px;padding-top:25px;">
+                    <div class="col-sm-3">
+                        @Html.LabelFor(m => m.Email, htmlAttributes: new { @class = "control-label" })
+                    </div>
+                    <div class="col-sm-9">
+                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control", enabled = "false" })
+                    </div>
+                </div>
+
+                <br/>
+            </fieldset>
+        </div>
+
+        @*BOOK IMAGE*@
+        <div class="col-sm-2">
+            <div class="image-book">
+                <img class="thumbnail-img" src="@Model.ImageUrl" alt="" style="width:100%;height:auto;" />
+            </div>
+        </div>
+
+    </div>
+    <br />
+
+
+    <p>
+        @*GO BACK BUTTON*@
+        @Html.Partial("_GoBackButtonPartial")
+
+        @*DISPLAYS BUTTON DEPENDING ON ACTION NAME*@
+        <input type="submit" value="@Model.actionName" id="btnSubmit" class="btn btn-sm btn-primary" />
+    </p>
+    <br />
+}
+

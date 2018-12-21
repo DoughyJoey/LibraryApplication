@@ -21,7 +21,9 @@ namespace LibraryApplication
 
             bundles.Add(new ScriptBundle("~/bundles/libraryRentalJs").Include(
                       "~/Scripts/bootstrap.js",
+                      //typeahead bundle for predictive text using ajax
                       "~/Scripts/typeahead.bundle.js",
+                      //activates dropdown functionality on admin panel
                       "~/Scripts/AdminMenu.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(

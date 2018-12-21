@@ -14,6 +14,7 @@ using LibraryApplication.Utility;
 
 namespace LibraryApplication.Controllers
 {
+
     [Authorize]
     public class AccountController : Controller
     {
@@ -162,6 +163,7 @@ namespace LibraryApplication.Controllers
         {
             if (ModelState.IsValid)
             {
+                //new fields added to registration page
                 var user = new ApplicationUser
                 {
                     UserName = model.Email,
@@ -188,13 +190,13 @@ namespace LibraryApplication.Controllers
 
                         if (memebership.ToLower().Contains("admin"))
                         {
-                            //For Super Admin
+                            //Creates an Admin user
                             await roleManager.CreateAsync(new IdentityRole(StaticDetails.AdminUserRole));
                             await UserManager.AddToRoleAsync(user.Id, StaticDetails.AdminUserRole);
                         }
                         else
                         {
-                            //For Customer
+                            //Creates a EndUser
                             await roleManager.CreateAsync(new IdentityRole(StaticDetails.EndUserRole));
                             await UserManager.AddToRoleAsync(user.Id, StaticDetails.EndUserRole);
                         }
@@ -439,12 +441,16 @@ namespace LibraryApplication.Controllers
                     BirthDate = model.BirthDate,
                     Phone = model.Phone,
                     MembershipID = model.MembershipID,
+                    //set disabled to false because user should not be disabled when account is created
                     Disable = false
                 };
+
                 var result = await UserManager.CreateAsync(user);
+
                 if (result.Succeeded)
                 {
                     result = await UserManager.AddLoginAsync(user.Id, info.Login);
+
                     if (result.Succeeded)
                     {
                         await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);

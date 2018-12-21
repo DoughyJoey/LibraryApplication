@@ -1,0 +1,36 @@
+﻿@model LibraryApplication.Models.Genre
+@{
+    ViewBag.Title = "Delete";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken();
+
+<div>
+    <h3><b>Delete</b></h3>
+
+
+    <div class="form-border" style="border:3px solid #D9B9C8; border-radius:7px;">
+        @*disabled attribute used to stop user from editing information*@
+        <fieldset disabled>
+            <div class="row" style="padding-bottom:20px; padding-top:7px;">
+                <div class="col-md-2">
+                    @Html.LabelFor(m => m.Name, htmlAttributes: new { @class = "control-label" })
+                </div>
+                <div class="col-md-10">
+                    @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+                </div>
+            </div>
+        </fieldset>
+    </div>
+</div>
+
+    <br/>
+    <div>
+        @*go back to the index back*@
+        @Html.Partial("_GoBackButtonPartial")
+        <input type="submit" value="Delete" class="btn btn-sm btn-danger" />
+    </div>
+}
+
